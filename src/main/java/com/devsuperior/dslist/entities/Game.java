@@ -12,17 +12,27 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_game")
 public class Game {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
-	
+
 	@Column(name = "game_year")
 	private Integer year;
 	private String genre;
-	private String plataform;
+	private String platforms;
+	private Double score;
+	private String imgUrl;
+
+	@Column(columnDefinition = "TEXT")
+	private String shortDescription;
+
+	@Column(columnDefinition = "TEXT")
 	private String longDescription;
+	
+	
+
 	public String getLongDescription() {
 		return longDescription;
 	}
@@ -31,25 +41,21 @@ public class Game {
 		this.longDescription = longDescription;
 	}
 
-	private String imgUrl;
-	private String shortDrescription;
-	
 	public Game() {
-		
+
 	}
 
-	
-	
-	public Game(Long id, String title, Integer year, String genre, String plataform, String longDescription,
-			String imgUrl, String shortDrescription) {		
+	public Game(Long id, String title, Integer year, String genre, String plataforms, Double score,
+			String longDescription, String imgUrl, String shortDrescription) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
-		this.plataform = plataform;
+		this.platforms = platforms;
+		this.score = score;
 		this.longDescription = longDescription;
 		this.imgUrl = imgUrl;
-		this.shortDrescription = shortDrescription;
+		this.shortDescription = shortDrescription;
 	}
 
 	public Long getId() {
@@ -85,11 +91,19 @@ public class Game {
 	}
 
 	public String getPlataform() {
-		return plataform;
+		return platforms;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
 	}
 
 	public void setPlataform(String plataform) {
-		this.plataform = plataform;
+		this.platforms = plataform;
 	}
 
 	public String getImgUrl() {
@@ -101,11 +115,11 @@ public class Game {
 	}
 
 	public String getShortDrescription() {
-		return shortDrescription;
+		return shortDescription;
 	}
 
 	public void setShortDrescription(String shortDrescription) {
-		this.shortDrescription = shortDrescription;
+		this.shortDescription = shortDrescription;
 	}
 
 	@Override
@@ -124,7 +138,5 @@ public class Game {
 		Game other = (Game) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 }
